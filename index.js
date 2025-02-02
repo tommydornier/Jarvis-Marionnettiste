@@ -5,23 +5,21 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
-    try {
-        const browser = await puppeteer.launch({ 
-            headless: "new", // Correction ici 
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] 
-        });
-        const page = await browser.newPage();
-        
-        await page.goto('https://www.vinted.fr/login', { timeout: 60000 });
+    const browser = await puppeteer.launch({ 
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        headless: "new" // Utilisation du mode headless recommandé
+    });
+    const page = await browser.newPage();
+    
+    await page.goto('https://www.vinted.fr/login', { waitUntil: 'networkidle2' });
 
-        console.log('Page ouverte sur Vinted');
-        
-        await browser.close();
-        res.send('Puppeteer a ouvert Vinted avec succès !');
-    } catch (error) {
-        console.error("Erreur lors de l'ouverture de la page :", error);
-        res.status(500).send("Erreur interne du serveur");
-    }
+    console.log('Page ouverte sur Vinted');
+    
+    // Capture un screenshot pour vérifier si la page se charge bien
+    await page.screenshot({ path: 'screenshot.png' });
+
+    await browser.close();
+    res.send('Puppeteer a ouvert Vinted avec succès et a pris un screenshot !');
 });
 
 app.listen(PORT, () => {
