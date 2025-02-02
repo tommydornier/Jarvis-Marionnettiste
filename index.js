@@ -5,7 +5,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    const browser = await puppeteer.launch({ 
+        headless: "new",  // Correction ici
+        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    });
+
     const page = await browser.newPage();
     
     await page.goto('https://www.vinted.fr/login');
