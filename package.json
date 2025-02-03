@@ -1,16 +1,17 @@
 {
-  "name": "jarvis-marionnettiste",
-  "version": "1.0.0",
-  "description": "Projet Puppeteer pour Vinted",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "engines": {
-    "node": "18.x"
-  },
-  "dependencies": {
-    "puppeteer": "^21.3.8",
-    "express": "^4.18.2"
-  }
+    "name": "jarvis-marionnettiste",
+    "version": "1.0.0",
+    "description": "Projet Puppeteer pour Jarvis",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "engines": {
+        "node": "18.x"
+    },
+    "dependencies": {
+        "puppeteer": "^21.3.8",
+        "express": "^4.18.2",
+        "@supabase/supabase-js": "^2.0.0"
+    }
 }
